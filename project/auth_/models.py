@@ -3,6 +3,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from utils.constants import USER_ROLES, USER_ROLE_CLIENT, USER_ROLE_STAFF, USER_ROLE_COURIER
+from utils.validators import validate_review, validate_card_number, validate_card_cvv, validate_phone_number
 
 # Create your models here.
 
@@ -38,12 +39,13 @@ class MainUserManager(BaseUserManager):
 
 class MainUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
-    first_name = models.CharField(_('first name'), max_length=30, blank=True)
-    last_name = models.CharField(_('last name'), max_length=30, blank=True)
+    first_name = models.CharField(_('first name'), max_length=30, blank=True, null=True)
+    last_name = models.CharField(_('last name'), max_length=30, blank=True, null=True)
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
     is_active = models.BooleanField(_('active'), default=True)
-    phone = models.CharField(_('phone number'), max_length=30, blank=True)
+    phone = models.CharField(_('phone number'), max_length=30, blank=True, null=True, validators=[validate_phone_number])
     role = models.SmallIntegerField(choices=USER_ROLES, default=USER_ROLE_CLIENT)
+    is_staff = models.BooleanField(_('is_staff'), default=False)
 
     objects = MainUserManager()
 
@@ -56,7 +58,7 @@ class MainUser(AbstractBaseUser, PermissionsMixin):
 
 
 class Staff(MainUser):
-    salary = models.IntegerField(_('salary'), default=0)
+    salary = models.PositiveIntegerField(_('salary'), default=0)
     role = USER_ROLE_STAFF
     is_staff = True
 
@@ -66,8 +68,8 @@ class Staff(MainUser):
 
 
 class Courier(MainUser):
-    salary = models.IntegerField(default=0)
-    review = models.FloatField(default=0)
+    salary = models.PositiveIntegerField(default=0)
+    review = models.PositiveIntegerField(default=0, validators=[validate_review])
     role = USER_ROLE_COURIER
     is_staff = False
 
@@ -77,11 +79,11 @@ class Courier(MainUser):
 
 
 class Card(models.Model):
-    number = models.CharField(_('number'), max_length=30, blank=True)
+    number = models.CharField(_('number'), max_length=16, blank=True, null=True, validators=[validate_card_number])
     expire_date = models.DateField(_('expire date'), auto_now_add=True)
-    balance = models.IntegerField(default=0)
-    cvv = models.CharField('cvv', max_length=3, blank=True)
-    full_name = models.CharField(_('full name'), max_length=30, blank=True)
+    balance = models.PositiveIntegerField(default=0)
+    cvv = models.CharField('cvv', max_length=3, blank=True, null=True, validators=[validate_card_cvv])
+    full_name = models.CharField(_('full name'), max_length=30, blank=True, null=True)
 
     class Meta:
         verbose_name = _('card')
@@ -100,8 +102,8 @@ class ClientManager(MainUserManager):
 
 
 class Client(MainUser):
-    address = models.CharField(_('address'), max_length=30, blank=True)
-    card = models.OneToOneField(Card, on_delete=models.CASCADE)
+    address = models.CharField(_('address'), max_length=30, blank=True, null=True)
+    card = models.OneToOneField(Card, on_delete=models.CASCADE, null=True)
     role = USER_ROLE_CLIENT
     is_staff = False
 
@@ -113,8 +115,7 @@ class Client(MainUser):
 
 
 class Profile(models.Model):
-    bio = models.TextField(max_length=500, blank=True)
-    location = models.CharField(max_length=30, blank=True)
+    bio = models.TextField(max_length=500, blank=True, null=True)
     birth_date = models.DateField(null=True, blank=True)
     user = models.OneToOneField(MainUser, on_delete=models.CASCADE)
 

@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from auth_.models import Client, Courier
+from utils.validators import validate_extension, validate_size
 # Create your models here.
 
 
@@ -26,8 +27,9 @@ class ProductManager(models.Manager):
 class ProductAbstract(models.Model):
     name = models.CharField(_('name'), max_length=30, blank=True)
     description = models.TextField(_('description'), null=True, blank=True)
-    price = models.IntegerField(_('price'), default=0)
-    # image = models.ImageField(_('image'), )
+    price = models.PositiveIntegerField(_('price'), default=0)
+    image = models.ImageField(upload_to='product_photos', validators=[validate_extension, validate_size],
+                              null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.RESTRICT, null=True, blank=True, verbose_name=_('category'))
 
     objects = ProductManager
@@ -104,7 +106,7 @@ class CartManager(models.Manager):
 
 class Cart(models.Model):
     products = models.ManyToManyField(Product)
-    amount = models.IntegerField(_('amount'), default=1)
+    amount = models.PositiveIntegerField(_('amount'), default=1)
     order = models.ForeignKey(Order, on_delete=models.RESTRICT, null=True, blank=True, verbose_name=_('order'))
 
     objects = CartManager
