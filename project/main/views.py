@@ -137,6 +137,13 @@ class OrderListView(generics.ListCreateAPIView):
             except:
                 logger.error(f'cart is not found, user id: {id}')
                 return JsonResponse({"404": "no such cart"}, safe=False)
+            price = sum(cart.products.values_list('price', flat=True))
+            card = cart.client.card
+            if card.balance >= price:
+                card.balance = card.balance - price
+                card.save()
+            else:
+                return JsonResponse({"500": "Not enough money"}, safe=False)
             try:
                 order = Order.objects.create(
                     client_id=self.request.user.id,

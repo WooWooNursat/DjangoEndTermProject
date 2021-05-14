@@ -82,3 +82,10 @@ INFO -- 2021-05-14 19:14:55,933: cart is changed, user id: 6
 INFO -- 2021-05-14 19:14:58,220: order is created, id: 17
 INFO -- 2021-05-14 19:20:06,634: cart is changed, user id: 6
 INFO -- 2021-05-14 19:20:08,802: order is created, id: 18
+INFO -- 2021-05-14 20:05:52,408: cart is changed, user id: 6
+INFO -- 2021-05-14 20:05:55,568: order is created, id: 19
+INFO -- 2021-05-14 20:06:59,698: cart is changed, user id: 6
+INFO -- 2021-05-14 20:07:21,574: cart is returned, user id: 6
+INFO -- 2021-05-14 20:07:48,635: order is created, id: 20
+INFO -- 2021-05-14 20:08:47,216: cart is changed, user id: 6
+INFO -- 2021-05-14 20:08:49,632: order is created, id: 21
