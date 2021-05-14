@@ -1,0 +1,26 @@
+INFO -- 2021-05-14 14:03:29,586: client is created, id: client1@gmail.com
+INFO -- 2021-05-14 14:17:50,018: courier is created, id: courier1@gmail.com
+INFO -- 2021-05-14 14:20:20,180: staff is created, id: staff1@gmail.com
+INFO -- 2021-05-14 14:37:29,722: client is created, id: client2@gmail.com
+INFO -- 2021-05-14 14:46:54,738: courier is created, id: courier2@gmail.com
+INFO -- 2021-05-14 14:47:22,612: staff is created, id: staff2@gmail.com
+INFO -- 2021-05-14 14:48:42,675: client is created, id: client3@gmail.com
+INFO -- 2021-05-14 14:58:17,055: client is returned, id: client1@gmail.com
+INFO -- 2021-05-14 14:58:41,162: client is returned, id: client1@gmail.com
+INFO -- 2021-05-14 14:59:30,226: client is updated, id: client1@gmail.com
+INFO -- 2021-05-14 15:00:37,862: profile is updated, id: client1@gmail.com
+INFO -- 2021-05-14 15:01:52,388: profile is returned, id: client1@gmail.com
+INFO -- 2021-05-14 15:12:19,066: profile is updated, id: client1@gmail.com
+INFO -- 2021-05-14 15:12:24,915: profile is returned, id: client1@gmail.com
+ERROR -- 2021-05-14 15:14:34,768: card is not found, user id: 2
+ERROR -- 2021-05-14 15:17:52,291: card is not found, user id: 6
+INFO -- 2021-05-14 15:20:24,006: client is returned, id: client2@gmail.com
+INFO -- 2021-05-14 15:21:06,881: client is returned, id: client2@gmail.com
+INFO -- 2021-05-14 15:22:42,550: client is returned, id: client2@gmail.com
+INFO -- 2021-05-14 15:22:45,469: card is returned, user id: 6
+INFO -- 2021-05-14 15:24:12,890: card is returned, user id: 6
+ERROR -- 2021-05-14 15:25:06,549: card is not found, user id: 6
+ERROR -- 2021-05-14 15:27:54,276: card is not found, user id: 6
+INFO -- 2021-05-14 15:30:24,570: card is updated, user id: 6
+INFO -- 2021-05-14 15:30:31,166: card is returned, user id: 6
+INFO -- 2021-05-14 17:36:16,720: profile is returned, id: client1@gmail.com

@@ -4,6 +4,7 @@ from auth_.serializers import ClientSerializer, CourierSerializer, StaffSerializ
 
 
 class CategorySerializer(serializers.Serializer):
+    id = serializers.IntegerField()
     name = serializers.CharField(max_length=30)
 
 
@@ -14,8 +15,6 @@ class ShortProductSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(ShortProductSerializer):
-    category = CategorySerializer()
-
     class Meta(ShortProductSerializer.Meta):
         model = Product
         fields = ShortProductSerializer.Meta.fields + ('description', 'category')
@@ -33,16 +32,35 @@ class FoodSerializer(ProductSerializer):
         fields = ProductSerializer.Meta.fields + ('ingredients',)
 
 
-class OrderSerializer(serializers.Serializer):
+class GetOrderSerializer(serializers.ModelSerializer):
     client = ClientSerializer()
     courier = CourierSerializer()
-    is_delivered = serializers.BooleanField()
+    products = ProductSerializer(many=True)
+    # is_delivered = serializers.BooleanField()
+
+    class Meta:
+        model = Order
+        fields = ('client', 'courier', 'products', 'is_delivered')
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ('client', 'courier', 'products', 'is_delivered')
 
 
 class CartSerializer(serializers.ModelSerializer):
-    products = ProductSerializer(many=True)
-    order = OrderSerializer()
+    client = ClientSerializer()
 
     class Meta:
         model = Cart
-        fields = ('products', 'amount', 'order',)
+        fields = ('products', 'client',)
+
+
+class GetCartSerializer(serializers.ModelSerializer):
+    client = ClientSerializer()
+    products = ProductSerializer(many=True)
+
+    class Meta:
+        model = Cart
+        fields = ('products', 'client')

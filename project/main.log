@@ -1,0 +1,84 @@
+INFO -- 2021-05-14 15:32:48,595: categories list is returned
+INFO -- 2021-05-14 15:33:29,778: categories list is returned
+INFO -- 2021-05-14 15:34:40,265: categories list is returned
+INFO -- 2021-05-14 15:34:43,956: category is created, id: category1
+INFO -- 2021-05-14 15:34:46,845: categories list is returned
+INFO -- 2021-05-14 15:37:02,340: category is returned, id: 1
+INFO -- 2021-05-14 15:37:33,190: category is returned, id: 1
+INFO -- 2021-05-14 15:38:23,096: category is changed, id: 1
+INFO -- 2021-05-14 15:38:26,526: categories list is returned
+INFO -- 2021-05-14 15:38:59,709: category is created, id: category2
+INFO -- 2021-05-14 15:39:06,231: category is returned, id: 2
+INFO -- 2021-05-14 15:39:09,337: category is deleted, id: 2
+INFO -- 2021-05-14 16:01:41,921: category is returned, id: 1
+INFO -- 2021-05-14 16:51:02,851: cart is returned, user id: 2
+INFO -- 2021-05-14 16:51:31,864: cart is changed, user id: 2
+INFO -- 2021-05-14 16:51:55,209: cart is returned, user id: 2
+INFO -- 2021-05-14 16:55:04,649: cart is changed, user id: 2
+INFO -- 2021-05-14 16:55:15,420: cart is changed, user id: 2
+INFO -- 2021-05-14 16:55:18,982: cart is returned, user id: 2
+INFO -- 2021-05-14 16:56:10,676: cart is changed, user id: 2
+INFO -- 2021-05-14 16:56:18,002: cart is returned, user id: 2
+INFO -- 2021-05-14 16:56:25,038: cart is changed, user id: 2
+ERROR -- 2021-05-14 17:02:25,982: product is not found, id: 2
+INFO -- 2021-05-14 17:10:01,574: orders are returned
+INFO -- 2021-05-14 17:13:36,426: orders are returned
+INFO -- 2021-05-14 17:14:12,291: orders are returned
+INFO -- 2021-05-14 17:19:03,310: orders are returned
+ERROR -- 2021-05-14 17:22:13,427: orders are not found
+ERROR -- 2021-05-14 17:22:29,902: orders are not found
+ERROR -- 2021-05-14 17:22:30,813: orders are not found
+INFO -- 2021-05-14 17:25:26,554: orders are returned
+INFO -- 2021-05-14 17:35:55,294: orders are returned
+INFO -- 2021-05-14 17:45:44,704: orders are returned
+INFO -- 2021-05-14 17:46:09,130: orders are returned
+INFO -- 2021-05-14 17:50:10,618: orders are returned
+INFO -- 2021-05-14 17:50:40,095: orders are returned
+INFO -- 2021-05-14 17:51:07,480: orders are returned
+INFO -- 2021-05-14 17:54:30,180: orders are returned
+INFO -- 2021-05-14 17:55:43,728: orders are returned
+ERROR -- 2021-05-14 17:59:06,268: cart is not found, user id: 1
+INFO -- 2021-05-14 18:15:49,211: orders are returned
+INFO -- 2021-05-14 18:16:50,574: orders are returned
+INFO -- 2021-05-14 18:17:36,530: orders are returned
+INFO -- 2021-05-14 18:17:51,499: orders are returned
+INFO -- 2021-05-14 18:19:01,285: orders are returned
+INFO -- 2021-05-14 18:19:10,751: orders are returned
+INFO -- 2021-05-14 18:19:23,058: orders are returned
+INFO -- 2021-05-14 18:21:09,559: cart is returned, user id: 2
+ERROR -- 2021-05-14 18:21:13,646: order cannot be created
+INFO -- 2021-05-14 18:42:28,899: cart is returned, user id: 2
+INFO -- 2021-05-14 18:42:54,224: cart is returned, user id: 2
+INFO -- 2021-05-14 18:46:33,806: order is created, id: 11
+INFO -- 2021-05-14 18:47:24,548: order is created, id: 12
+ERROR -- 2021-05-14 18:49:09,003: order is not found, id: <built-in function id>
+INFO -- 2021-05-14 18:51:56,086: order is returned, id: 1
+INFO -- 2021-05-14 18:54:07,053: orders are returned
+INFO -- 2021-05-14 18:54:59,591: order is changed, id: 1
+INFO -- 2021-05-14 18:56:55,284: order is changed, id: 1
+INFO -- 2021-05-14 18:57:03,948: order is changed, id: 1
+INFO -- 2021-05-14 18:57:26,030: order is returned, id: 1
+INFO -- 2021-05-14 18:59:30,836: order is changed, id: 1
+INFO -- 2021-05-14 18:59:53,093: order is changed, id: 2
+INFO -- 2021-05-14 19:06:27,003: cart is returned, user id: 6
+INFO -- 2021-05-14 19:06:33,129: cart is changed, user id: 6
+INFO -- 2021-05-14 19:06:39,089: cart is returned, user id: 6
+INFO -- 2021-05-14 19:06:44,418: order is created, id: 13
+INFO -- 2021-05-14 19:07:05,745: orders are returned
+INFO -- 2021-05-14 19:07:46,820: order is returned, id: 13
+INFO -- 2021-05-14 19:08:09,612: orders are returned
+INFO -- 2021-05-14 19:11:48,811: cart is returned, user id: 6
+INFO -- 2021-05-14 19:11:52,113: cart is changed, user id: 6
+INFO -- 2021-05-14 19:11:55,246: order is created, id: 14
+INFO -- 2021-05-14 19:11:59,729: cart is returned, user id: 6
+INFO -- 2021-05-14 19:12:10,954: order is returned, id: 14
+INFO -- 2021-05-14 19:13:11,029: cart is returned, user id: 6
+INFO -- 2021-05-14 19:13:14,646: cart is changed, user id: 6
+INFO -- 2021-05-14 19:13:17,353: cart is returned, user id: 6
+INFO -- 2021-05-14 19:13:27,290: order is created, id: 15
+INFO -- 2021-05-14 19:14:10,569: cart is changed, user id: 6
+INFO -- 2021-05-14 19:14:13,497: order is created, id: 16
+INFO -- 2021-05-14 19:14:55,933: cart is changed, user id: 6
+INFO -- 2021-05-14 19:14:58,220: order is created, id: 17
+INFO -- 2021-05-14 19:20:06,634: cart is changed, user id: 6
+INFO -- 2021-05-14 19:20:08,802: order is created, id: 18

@@ -46,6 +46,9 @@ class Product(ProductAbstract):
         verbose_name = 'product'
         verbose_name_plural = 'products'
 
+    def __str__(self):
+        return self.name
+
 
 class Wear(Product):
     size = models.CharField(_('size'), max_length=10, blank=True)
@@ -77,13 +80,17 @@ class OrderManager(models.Manager):
     def get_order_courier(self):
         return self.get_related().courier
 
+    def get_products_products(self):
+        return self.get_related().products
+
     def get_related(self):
-        return self.select_related('client', 'courier')
+        return self.select_related('client', 'courier', 'products')
 
 
 class Order(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.RESTRICT, null=True, blank=True, verbose_name=_('client'))
-    courier = models.ForeignKey(Courier, on_delete=models.RESTRICT, null=True, blank=True, verbose_name=_('courier'))
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, null=True)
+    courier = models.ForeignKey(Courier, on_delete=models.CASCADE, null=True)
+    products = models.ManyToManyField(Product, blank=True)
     is_delivered = models.BooleanField(default=False)
 
     objects = OrderManager
@@ -93,21 +100,23 @@ class Order(models.Model):
         verbose_name_plural = 'Orders'
 
     def __str__(self):
-        return self.id
+        return self.id.__str__()
 
 
 class CartManager(models.Manager):
-    def get_order(self):
-        return self.get_related().order
+    def get_products(self):
+        return self.get_related().products
+
+    def get_client(self):
+        return self.get_related().client
 
     def get_related(self):
-        return self.select_related('order')
+        return self.select_related('products', 'client')
 
 
 class Cart(models.Model):
-    products = models.ManyToManyField(Product)
-    amount = models.PositiveIntegerField(_('amount'), default=1)
-    order = models.ForeignKey(Order, on_delete=models.RESTRICT, null=True, blank=True, verbose_name=_('order'))
+    products = models.ManyToManyField(Product, blank=True)
+    client = models.OneToOneField(Client, on_delete=models.CASCADE, null=True)
 
     objects = CartManager
 
@@ -116,5 +125,4 @@ class Cart(models.Model):
         verbose_name_plural = 'Carts'
 
     def __str__(self):
-        return self.id
-
+        return self.id.__str__()

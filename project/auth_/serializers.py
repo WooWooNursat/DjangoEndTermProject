@@ -5,7 +5,7 @@ from auth_.models import MainUser, Client, Staff, Courier, Profile, Card
 class MainUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = MainUser
-        fields = ('email', 'first_name', 'last_name', 'phone')
+        fields = ('id', 'email', 'first_name', 'last_name', 'phone')
 
 
 class CardSerializer(serializers.ModelSerializer):
@@ -32,9 +32,12 @@ class StaffSerializer(MainUserSerializer):
         fields = MainUserSerializer.Meta.fields + ('salary',)
 
 
-class ProfileSerializer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    bio = serializers.CharField()
+    birth_date = serializers.DateField()
     user = MainUserSerializer()
 
-    class Meta:
-        model = Profile
-        fields = ('id', 'bio', 'birth_date', 'user')
+    # class Meta:
+    #     model = Profile
+    #     fields = ('id', 'bio', 'birth_date', 'user')

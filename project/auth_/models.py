@@ -2,7 +2,7 @@ from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from utils.constants import USER_ROLES, USER_ROLE_CLIENT, USER_ROLE_STAFF, USER_ROLE_COURIER
+from utils.constants import USER_ROLES, USER_ROLE_CLIENT, USER_ROLE_STAFF, USER_ROLE_COURIER, USER_ROLE_SUPER_USER
 from utils.validators import validate_review, validate_card_number, validate_card_cvv, validate_phone_number
 
 # Create your models here.
@@ -25,11 +25,19 @@ class MainUserManager(BaseUserManager):
 
     def create_user(self, email, password=None, **extra_fields):
         extra_fields.setdefault('is_superuser', False)
+        if self.model is Client:
+            extra_fields.setdefault('role', USER_ROLE_CLIENT)
+        elif self.model is Staff:
+            extra_fields.setdefault('is_staff', True)
+            extra_fields.setdefault('role', USER_ROLE_STAFF)
+        elif self.model is Courier:
+            extra_fields.setdefault('role', USER_ROLE_COURIER)
         return self._create_user(email, password, **extra_fields)
 
     def create_superuser(self, email, password, **extra_fields):
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('role', USER_ROLE_SUPER_USER)
 
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
@@ -66,6 +74,9 @@ class Staff(MainUser):
         verbose_name = _('staff')
         verbose_name_plural = _('staff')
 
+    def __str__(self):
+        return self.email.__str__()
+
 
 class Courier(MainUser):
     salary = models.PositiveIntegerField(default=0)
@@ -77,10 +88,13 @@ class Courier(MainUser):
         verbose_name = _('courier')
         verbose_name_plural = _('couriers')
 
+    def __str__(self):
+        return self.email.__str__()
+
 
 class Card(models.Model):
     number = models.CharField(_('number'), max_length=16, blank=True, null=True, validators=[validate_card_number])
-    expire_date = models.DateField(_('expire date'), auto_now_add=True)
+    expire_date = models.DateField(_('expire date'), null=True, blank=True)
     balance = models.PositiveIntegerField(default=0)
     cvv = models.CharField('cvv', max_length=3, blank=True, null=True, validators=[validate_card_cvv])
     full_name = models.CharField(_('full name'), max_length=30, blank=True, null=True)
@@ -90,7 +104,7 @@ class Card(models.Model):
         verbose_name_plural = _('cards')
 
     def __str__(self):
-        return self.number
+        return self.id.__str__()
 
 
 class ClientManager(MainUserManager):
@@ -107,11 +121,14 @@ class Client(MainUser):
     role = USER_ROLE_CLIENT
     is_staff = False
 
-    objects = ClientManager
+    objects = ClientManager()
 
     class Meta:
         verbose_name = _('client')
         verbose_name_plural = _('clients')
+
+    def __str__(self):
+        return self.email.__str__()
 
 
 class Profile(models.Model):
@@ -122,4 +139,7 @@ class Profile(models.Model):
     class Meta:
         verbose_name = 'Профиль'
         verbose_name_plural = 'Профили'
+
+    def __str__(self):
+        return self.user.email.__str__()
 
