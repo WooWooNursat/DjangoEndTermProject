@@ -36,4 +36,7 @@ Signals for Cart on creating a client or ordering<br/>
 
 # Other stuff in the project
 Class diagram of the project included<br/>
+[class_diagram_django.pdf](https://github.com/WooWooNursat/DjangoEndTermProject/files/6483698/class_diagram_django.pdf)
+
 Short description<br/>
+
