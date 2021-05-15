@@ -34,6 +34,8 @@ def category_list_view(request):
         return JsonResponse(serializer.data, safe=False)
 
     if request.method == 'POST':
+        if request.user.is_staff is False:
+            return JsonResponse({"500": StaffPermission.message}, safe=False)
         try:
             category = Category.objects.create(
                 name=request.data.get('name')
@@ -58,6 +60,8 @@ def category_detailed_view(request, id):
         logger.info(f'category is returned, id: {id}')
         return JsonResponse(serializer.data, safe=False)
     elif request.method == 'PUT':
+        if request.user.is_staff is False:
+            return JsonResponse({"500": StaffPermission.message}, safe=False)
         try:
             category_detailed = Category.objects.get(id=id)
         except:
@@ -69,6 +73,8 @@ def category_detailed_view(request, id):
         logger.info(f'category is changed, id: {id}')
         return JsonResponse(serializer.data, safe=False)
     elif request.method == 'DELETE':
+        if request.user.is_staff is False:
+            return JsonResponse({"500": StaffPermission.message}, safe=False)
         try:
             category_detailed = Category.objects.get(id=id)
         except:
